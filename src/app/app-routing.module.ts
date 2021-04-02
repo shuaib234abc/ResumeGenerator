@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IntroductionComponent } from './introduction/introduction.component';
+import { Step1Component } from './step1/step1.component';
+import { Step2Component } from './step2/step2.component';
 
-const routes: Routes = [];
+//ref: https://angular.io/generated/live-examples/getting-started-v0/stackblitz
+const routes: Routes = [
+  { path: '', component: IntroductionComponent },
+  { path: 'step1', component: Step1Component },
+  { path: 'step2', component: Step2Component },    
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

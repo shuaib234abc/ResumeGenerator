@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+.accordion .card .card-header{
+    background-color:#536dfe;
+}
+.accordion .card .card-header button{
+    color:white;
+}
+
+.accordion .card .card-body{
+    background-color:#e1f5fe;
+}
+
+#div_to_print, #div_to_print * {
+  font-family: "Times New Roman" !important;
+}
+
+/* ref: https://stackoverflow.com/questions/468881/print-div-id-printarea-div-only */
+/* the code below has been copied from the link just above */
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    #div_to_print, #div_to_print * {
+      visibility: visible;
+      font-family: "Times New Roman" !important;
+    }
+    #div_to_print {
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+  }

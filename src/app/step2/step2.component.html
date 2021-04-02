@@ -1,0 +1,204 @@
+<div class="row">
+    <div class="col-12 col-md-12">
+
+        <!-- ref: https://getbootstrap.com/docs/5.0/components/card/ -->
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Step 2: View / print resume data</h5>
+                                   
+              <a (click)="print()" class="btn btn-success">Print</a>
+
+              <hr />
+
+              <div style="width:95%;margin:0px auto;border:1px solid #ccc">
+
+                <div id="div_to_print">
+
+                  <div style="padding:2%">
+
+                    <table style="width:100%;margin-bottom:6%">
+                      <tr>
+                        <td style="width:80%">
+                          <span style="font-size:1.4em; text-transform: uppercase; font-weight:800">{{ resumeData.fullName }}</span>
+                          <br />
+                          <span style="font-size:1.05em;">Email: {{ resumeData.emailAddr }}</span> 
+                          <br />
+                          <span style="font-size:1.05em;">Contact number: {{ combinedContactNumber }}</span>   
+                          <br />
+                          <span style="font-size:1.05em;">{{ resumeData.mailingAddr }}</span>                            
+                        </td>  
+                        <td style="width:20%">
+                          <img style="width:100%" src="{{ resumeData.photo }}" />
+                        </td>
+                      </tr>
+                  </table>
+
+                  <table style="width:100%;margin-bottom:6%">
+                    <tr>
+                        <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">CAREER OBJECTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>{{ resumeData.careerObjective }}</td>
+                    </tr>
+                  </table>
+
+                  <table style="width:100%;;margin-bottom:6%">
+                      <tr>
+                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">CAREER SUMMARY</td>
+                      </tr>
+                      <tr>
+                          <td>{{ resumeData.careerSummary }}</td>
+                      </tr>
+                  </table>
+                             
+                  <table style="width:100%;margin-bottom:6%">
+                      <tr>
+                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">EMPLOYMENT HISTORY</td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <table style="width:95%;margin:0px auto">
+                                    <tbody>
+                                      <tr *ngFor="let d of resumeData['professionalExperience']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                        <td style="width:10%;padding-top:3%">{{ i + 1 }}</td>
+                                        <td style="width:90%;padding-top:3%">
+                                          
+                                          <span>
+                                            <span style="font-weight:650">{{ d.designationHeld }}</span> at <span style="font-weight:650;color:#7777ac;">{{ d.companyName }}</span>
+                                          </span>
+                                          <br />
+                                          <span style="text-decoration: underline;">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
+                                          <br />
+                                          <span style="text-decoration: underline;">Responsibilities:</span>
+                                          <br />
+                                          <ul>
+                                            <li *ngFor="let r of d['employmentRoleDescAsArr']; ">{{r}}</li>
+                                          </ul>
+                                        </td>
+
+                                      </tr>
+                                    </tbody>
+                              </table>
+                          </td>
+                      </tr>
+                  </table>          
+                  
+                  <table style="width:100%;margin-bottom:6%">
+                      <tr>
+                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">ACADEMIC QUALIFICATIONS</td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <table style="width:95%;margin:0px auto;margin-top:4%">
+                                  <thead>
+                                      <tr>
+                                        <th style="border:1px solid #ccc;padding:2%">Exam tile</th>
+                                        <th style="border:1px solid #ccc;padding:2%">Institution</th>
+                                        <th style="border:1px solid #ccc;padding:2%">Result</th>
+                                        <th style="border:1px solid #ccc;padding:2%">Passing year</th>           
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let d of resumeData['academicDegrees']">
+                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicExamTitle }}</td>
+                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicInstitution }}</td>
+                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicResult }}</td>
+                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicPassingYear }}
+                                      </tr>
+                                    </tbody>
+                              </table>
+                          </td>
+                      </tr>
+                  </table>       
+                  
+                  <table [hidden]="resumeData.academicAchievements.length <= 0" style="width:100%;margin-bottom:6%">
+                    <tr>
+                      <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Academic / Extra Curricular achievements</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width:95%;margin:0px auto;margin-top:1%">
+                              <tbody>
+                                <tr *ngFor="let d of resumeData['academicAchievements']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                  <td style="width:10%;padding-top:3%">{{ d.academicAchievementYear }}</td>
+                                  <td style="width:90%;padding-top:3%">
+                                    
+                                    <span style="font-weight:650;font-weight:650;color:#7777ac;">{{ d.academicAchievementTitle }}</span>
+                                    <br />
+                                    {{ d.academicAchievementDesc }}
+                                  </td>
+
+                                </tr>
+                              </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                  </table>
+
+                  <table [hidden]="resumeData.professionalAchievements.length <= 0" style="width:100%;margin-bottom:6%">
+                    <tr>
+                      <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Professional Achievements</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width:95%;margin:0px auto;margin-top:1%">
+                              <tbody>
+                                <tr *ngFor="let d of resumeData['professionalAchievements']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                  <td style="width:10%;padding-top:3%">{{ d.professionalAchievementYear }}</td>
+                                  <td style="width:90%;padding-top:3%">
+                                    
+                                    <span style="font-weight:650;font-weight:650;color:#7777ac;">{{ d.professionalAchievementTitle }}</span>
+                                    <br />
+                                    {{ d.professionalAchievementDesc }}
+                                  </td>
+
+                                </tr>
+                              </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                  </table>                    
+
+                  <table [hidden]="resumeData.references.length <= 0" style="width:100%;margin-bottom:6%">
+                    <tr>
+                      <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">References</td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                          <div *ngFor="let d of resumeData['references']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                            <div style="font-weight:650;font-weight:650;color:#7777ac;">{{ d.referenceName }}</div>
+                            <div>{{d.referenceDesignation}} at {{d.referenceCompany}}</div>
+                            <div>
+                                <table style="width:100%">
+                                  <tr>
+                                    <td style="width:20%">Relation:</td>
+                                    <td style="width:80%">{{d.referenceRelationTo}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="width:20%">Contact information:</td>
+                                    <td style="width:80%">
+                                      {{d.referenceContactNumber}}
+                                      <br />
+                                      {{d.referenceEmailAddr}}
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>                              
+                          </div>
+
+                        </td>
+                    </tr>
+                  </table>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

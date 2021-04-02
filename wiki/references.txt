@@ -1,0 +1,11 @@
+1. https://angular.io/start
+2. https://angular.io/generated/live-examples/getting-started-v0/stackblitz
+
+Reactive forms
+1. https://www.freecodecamp.org/news/how-to-validate-angular-reactive-forms/
+2. https://www.tutsmake.com/angular-11-reactive-forms-validation-tutorial-example/
+3. https://hdtuto.com/article/angular-11-forms-validation-example
+4. https://www.remotestack.io/angular-reactive-forms-validation-tutorial-example/
+
+UX design
+1. https://material.io/resources/color/

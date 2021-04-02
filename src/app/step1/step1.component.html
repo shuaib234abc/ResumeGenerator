@@ -1,0 +1,339 @@
+<div class="row">
+    <div class="col-12 col-md-12">
+
+        <!-- ref: https://getbootstrap.com/docs/5.0/components/card/ -->
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Step 1: Enter resume data</h5>
+              <hr />                      
+
+              <!-- ref: https://getbootstrap.com/docs/4.6/components/forms/ -->
+                <!-- ref: https://www.freecodecamp.org/news/how-to-validate-angular-reactive-forms/ -->              
+              <form  [formGroup]="dataForm" (ngSubmit)="onDataFormSubmit()">
+
+                <!-- ref: https://ng-bootstrap.github.io/#/components/accordion/examples -->
+                <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                    <ngb-panel title="Personally identifiable information">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                <label for="fullName">Full name</label>
+                                <input type="text" class="form-control" id="fullName" formControlName="fullName">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailAddr">Email address</label>
+                                <input type="email" class="form-control" id="emailAddr" formControlName="emailAddr">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactNumber1">Contact number 1</label>
+                                <input type="text" class="form-control" id="contactNumber1" formControlName="contactNumber1">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactNumber2">Contact number 2</label>
+                                <input type="text" class="form-control" id="contactNumber2" formControlName="contactNumber2">
+                            </div>                   
+                            <div class="form-group">
+                                <label for="photo">Photo</label>
+                                <input type="file" class="form-control" id="photo" formControlName="photo" (change)="photoFormControlChanged($event)" >
+                            </div>                     
+                        </ng-template>
+                    </ngb-panel>
+                    <ngb-panel title="Address details">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                <label for="mailingAddr">Mailing address</label>
+                                <textarea rows="5" cols="8" class="form-control" id="mailingAddr" formControlName="mailingAddr"></textarea>
+                            </div>                                    
+                        </ng-template>
+                    </ngb-panel>                
+                    <ngb-panel title="Career objective / summary">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                <label for="careerObjective">Career Objective</label>
+                                <textarea rows="5" cols="8" class="form-control" id="careerObjective" formControlName="careerObjective"></textarea>
+                            </div>                                  
+                            <div class="form-group">
+                                <label for="careerSummary">Career Summary</label>
+                                <textarea rows="5" cols="8" class="form-control" id="careerSummary" formControlName="careerSummary"></textarea>
+                            </div>                                                          
+                        </ng-template>
+                    </ngb-panel>                    
+                    <ngb-panel title="Employment history">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                    <label for="companyName">Company name</label>
+                                    <input type="text" class="form-control" id="companyName" formControlName="companyName">
+                            </div>
+                            <div class="form-group">
+                                <label for="companyLocation">Company location</label>
+                                <input type="text" class="form-control" id="companyLocation" formControlName="companyLocation">
+                            </div>                      
+                            <div class="form-group">
+                                <label for="designationHeld">Designation held</label>
+                                <input type="text" class="form-control" id="designationHeld" formControlName="designationHeld">
+                            </div>      
+                            <div class="form-group">
+                                <label for="employmentFrom">From</label>
+                                <input type="date" class="form-control" id="employmentFrom" formControlName="employmentFrom">
+                            </div>      
+                            <div class="form-group">
+                                <label for="employmentTo">To</label>
+                                <input type="date" class="form-control" id="employmentTo" formControlName="employmentTo">
+                                <input type="checkbox" id="employmentCurrentWorking" formControlName="employmentCurrentWorking" /> currently working
+                            </div>                                                                                        
+                            <div class="form-group">
+                                <label for="employmentRoleDesc">Role description</label>
+                                <textarea rows="5" cols="8" class="form-control" id="employmentRoleDesc" formControlName="employmentRoleDesc"></textarea>
+                            </div>       
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" (click)="addExp($event)">Add this information</button>
+                            </div>      
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Company name</th>
+                                    <th>Company location</th>
+                                    <th>Designation</th>
+                                    <th>From</th>
+                                    <th>To</th>                                    
+                                    <th>Responsibilities</th>                                    
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['professionalExperience']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ d.companyName }}</td>
+                                    <td>{{ d.companyLocation }}</td>
+                                    <td>{{ d.designationHeld }}</td>
+                                    <td>{{ d.employmentFrom }}</td>
+                                    <td>{{ d.employmentTo }}</td>
+                                    <td>{{ d.employmentRoleDesc }}</td>
+                                    <td>
+                                      <a class="" (click)="deleteExp($event, i)">X</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>                                           
+                        </ng-template>
+                    </ngb-panel>                
+                    <ngb-panel title="Academic information">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                    <label for="academicExamTitle">Exam title</label>
+                                    <input type="text" class="form-control" id="academicExamTitle" formControlName="academicExamTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="academicInstitution">Institution</label>
+                                <input type="text" class="form-control" id="academicInstitution" formControlName="academicInstitution">
+                            </div>                      
+                            <div class="form-group">
+                                <label for="academicResult">Result</label>
+                                <input type="text" class="form-control" id="academicResult" formControlName="academicResult">
+                            </div>      
+                            <div class="form-group">
+                                <label for="academicPassingYear">Passing Year</label>
+                                <input type="text" class="form-control" id="academicPassingYear" formControlName="academicPassingYear">
+                            </div>    
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" (click)="addAcademicDegree($event)">Add this information</button>
+                            </div>      
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Exam tile</th>
+                                    <th>Institution</th>
+                                    <th>Result</th>
+                                    <th>Passing year</th>                                    
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['academicDegrees']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ d.academicExamTitle }}</td>
+                                    <td>{{ d.academicInstitution }}</td>
+                                    <td>{{ d.academicResult }}</td>
+                                    <td>{{ d.academicPassingYear }}</td>
+                                    <td>
+                                      <a class="" (click)="deleteAcademicDegree($event, i)">X</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>                                                                                
+                        </ng-template>
+                    </ngb-panel>
+                    <ngb-panel title="Academic / extra curricular achievements">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                    <label for="academicAchievementTitle">Title</label>
+                                    <input type="text" class="form-control" id="academicAchievementTitle" formControlName="academicAchievementTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="academicAchievementDesc">Description</label>
+                                <input type="text" class="form-control" id="academicAchievementDesc" formControlName="academicAchievementDesc">
+                            </div>                      
+                            <div class="form-group">
+                                <label for="academicAchievementYear">Year</label>
+                                <input type="text" class="form-control" id="academicAchievementYear" formControlName="academicAchievementYear">
+                            </div>     
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" (click)="addAcademicAchievement($event)">Add this information</button>
+                            </div>      
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Year</th>                                    
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['academicAchievements']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ d.academicAchievementTitle }}</td>
+                                    <td>{{ d.academicAchievementDesc }}</td>
+                                    <td>{{ d.academicAchievementYear }}</td>
+                                    <td>
+                                      <a class="" (click)="deleteAcademicAchievement($event, i)">X</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>                                                                               
+                        </ng-template>
+                    </ngb-panel>                                
+                    <ngb-panel title="Professional achievements">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                    <label for="professionalAchievementTitle">Title</label>
+                                    <input type="text" class="form-control" id="professionalAchievementTitle" formControlName="professionalAchievementTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="professionalAchievementDesc">Description</label>
+                                <input type="text" class="form-control" id="professionalAchievementDesc" formControlName="professionalAchievementDesc">
+                            </div>                      
+                            <div class="form-group">
+                                <label for="professionalAchievementYear">Year</label>
+                                <input type="text" class="form-control" id="professionalAchievementYear" formControlName="professionalAchievementYear">
+                            </div>     
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" (click)="addProfessionalAchievement($event)">Add this information</button>
+                            </div>      
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Year</th>                                    
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['professionalAchievements']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ d.professionalAchievementTitle }}</td>
+                                    <td>{{ d.professionalAchievementDesc }}</td>
+                                    <td>{{ d.professionalAchievementYear }}</td>
+                                    <td>
+                                      <a class="" (click)="deleteProfessionalAchievement($event, i)">X</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>                                                                                         
+                        </ng-template>
+                    </ngb-panel>
+                    <ngb-panel title="References">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                    <label for="referenceName">Name</label>
+                                    <input type="text" class="form-control" id="referenceName" formControlName="referenceName">
+                            </div>
+                            <div class="form-group">
+                                <label for="referenceDesignation">Designation</label>
+                                <input type="text" class="form-control" id="referenceDesignation" formControlName="referenceDesignation">
+                            </div>                      
+                            <div class="form-group">
+                                <label for="referenceCompany">Company</label>
+                                <input type="text" class="form-control" id="referenceCompany" formControlName="referenceCompany">
+                            </div>                                                        
+                            <div class="form-group">
+                                <label for="referenceRelationTo">Relation to reference</label>
+                                <input type="text" class="form-control" id="referenceRelationTo" formControlName="referenceRelationTo">
+                            </div>                  
+                            <div class="form-group">
+                                <label for="referenceEmailAddr">Email address</label>
+                                <input type="email" class="form-control" id="referenceEmailAddr" formControlName="referenceEmailAddr">
+                            </div>
+                            <div class="form-group">
+                                <label for="referenceContactNumber">Contact number</label>
+                                <input type="text" class="form-control" id="referenceContactNumber" formControlName="referenceContactNumber">
+                            </div>    
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" (click)="addReference($event)">Add this information</button>
+                            </div>      
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Company</th>
+                                    <th>Relation to</th>
+                                    <th>Contact number</th>
+                                    <th>Email</th>                                                                        
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['references']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ d.referenceName }}</td>
+                                    <td>{{ d.referenceDesignation }}</td>
+                                    <td>{{ d.referenceCompany }}</td>
+                                    <td>{{ d.referenceRelationTo }}</td>
+                                    <td>{{ d.referenceContactNumber }}</td>
+                                    <td>{{ d.referenceEmailAddr }}</td>                                    
+                                    <td>
+                                      <a class="" (click)="deleteReference($event, i)">X</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>                                                       
+                        </ng-template>
+                    </ngb-panel>                                                                
+                </ngb-accordion>
+
+                <hr />
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+              <div [hidden]="generateDataLinkClicked == true && downloadLinkClicked == false" style="padding-top:5%">
+                  You can save the data entered in the form in a downloadable file, and use it later on.
+                  <br />
+                  To save the data, click the link below
+                  <br />
+                  <a (click)="generateFile()" class="btn btn-success">Generate file</a>
+              </div>
+
+              <div [hidden]="generateDataLinkClicked == false && downloadLinkClicked == false" style="padding-top:5%">
+                  <a (click)="downloadFile()" class="btn btn-success" [href]="downloadJsonHref" download="form_data.json">Download data</a>
+              </div>
+              
+              <div style="padding-top:5%">
+                If you aleady have a previously downloaded file, upload it to automatically fill up the form.
+                <br />
+                
+                <!-- ref: https://stackoverflow.com/questions/54971238/upload-json-file-using-angular-6 -->
+                <input type="file" id="uploadedJson" (change)="onUploadedJsonFileChanged($event)" />
+                <a (click)="processUploadedJson()" class="btn btn-success">Next</a>
+            </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
