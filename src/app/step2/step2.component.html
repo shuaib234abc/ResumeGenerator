@@ -1,3 +1,50 @@
+<!-- ref: https://ng-bootstrap.github.io/#/components/modal/examples -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Settings</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" id="div_modalBodyForPrintSettings">
+
+    <table class="table">
+        <tr>
+          <td>Academic achievement</td>
+          <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideAcademicAchievements" /> avoid page break inside this section</td>
+        </tr>
+        <tr>
+          <td>Academic degrees</td>
+          <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideAcademicDegrees" /> avoid page break inside this section</td>
+        </tr>
+        <tr>
+          <td>Employment history</td>
+          <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideExperienceData" /> avoid page break inside this section</td>
+        </tr>
+        <tr>
+          <td>Featured personal projects</td>
+          <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideGithubProjects" /> avoid page break inside this section</td>
+        </tr>
+        <tr>
+          <td>Language proficiency</td>
+          <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideLanguageProficiency" /> avoid page break inside this section</td>
+        </tr>
+        <tr>
+          <td>Professional achievement</td>
+          <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideProfessionalAchievements" /> avoid page break inside this section</td>
+        </tr>                     
+        <tr>
+          <td>References</td>
+          <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideReferences" /> avoid page break inside this section</td>
+        </tr>                                                
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+
 <div class="row">
     <div class="col-12 col-md-12">
 
@@ -7,6 +54,8 @@
               <h5 class="card-title">Step 2: View / print resume data</h5>
                                    
               <a (click)="print()" class="btn btn-success">Print</a>
+              &nbsp;&nbsp;
+              <a (click)="open(content)" class="btn btn-primary">Settings</a>  <!-- https://ng-bootstrap.github.io/#/components/modal/examples -->
 
               <hr />
 
@@ -63,7 +112,7 @@
                       </tr>
                   </table>
                              
-                  <table [hidden]="resumeData.githubProjects.length <= 0" style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.githubProjects.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideGithubProjects}">
                       <tr>
                           <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Featured Personal Projects</td>
                       </tr>
@@ -84,7 +133,7 @@
                       </tr>
                   </table>      
                   
-                  <table [hidden]="resumeData.professionalExperience.length <= 0" style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.professionalExperience.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideExperienceData}">
                     <tr>
                         <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">EMPLOYMENT HISTORY</td>
                     </tr>
@@ -109,7 +158,7 @@
                     </tr>
                 </table>                        
                   
-                  <table [hidden]="resumeData.academicDegrees.length <= 0" style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.academicDegrees.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicDegrees}">
                       <tr>
                           <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">ACADEMIC QUALIFICATIONS</td>
                       </tr>
@@ -137,7 +186,7 @@
                       </tr>
                   </table>       
                   
-                  <table [hidden]="resumeData.academicAchievements.length <= 0" style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.academicAchievements.length <= 0" style="width:100%;margin-bottom:6%"   [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicAchievements}">
                     <tr>
                       <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Academic / Extra Curricular achievements</td>
                     </tr>
@@ -161,7 +210,7 @@
                     </tr>
                   </table>
 
-                  <table [hidden]="resumeData.professionalAchievements.length <= 0" style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.professionalAchievements.length <= 0" style="width:100%;margin-bottom:6%"  [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideProfessionalAchievements}">
                     <tr>
                       <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Professional Achievements</td>
                     </tr>
@@ -185,7 +234,7 @@
                     </tr>
                   </table>                    
 
-                  <table [hidden]="resumeData.references.length <= 0" style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.references.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideReferences}">
                     <tr>
                       <!-- ref: https://www.w3schools.com/cssref/pr_print_pagebi.asp -->
                       <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">References</td>

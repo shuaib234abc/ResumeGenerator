@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeData } from '../models/resumedata';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-step2',
@@ -10,8 +11,15 @@ export class Step2Component implements OnInit {
 
   resumeData: ResumeData;
   combinedContactNumber: string;
+  cssValueForPageBreakInsideGithubProjects: string
+  cssValueForPageBreakInsideLanguageProficiency: string        
+  cssValueForPageBreakInsideExperienceData: string        
+  cssValueForPageBreakInsideAcademicDegrees: string        
+  cssValueForPageBreakInsideAcademicAchievements: string        
+  cssValueForPageBreakInsideProfessionalAchievements: string     
+  cssValueForPageBreakInsideReferences: string         
 
-  constructor() {
+  constructor(private modalService: NgbModal) {
 
     this.combinedContactNumber = ""
 
@@ -44,6 +52,24 @@ export class Step2Component implements OnInit {
         this.resumeData.professionalExperience[i].employmentTo = this.convert_YYYYMMDD_to_DDMMMYYYY(this.resumeData.professionalExperience[i].employmentTo);
       }
     }
+
+    this.cssValueForPageBreakInsideAcademicAchievements = this.resumeData.avoidPageBreakInsideAcademicAchievements == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideAcademicDegrees = this.resumeData.avoidPageBreakInsideAcademicDegrees == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideExperienceData = this.resumeData.avoidPageBreakInsideExperienceData == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideGithubProjects = this.resumeData.avoidPageBreakInsideGithubProjects == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideLanguageProficiency = this.resumeData.avoidPageBreakInsideLanguageProficiency == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideProfessionalAchievements = this.resumeData.avoidPageBreakInsideProfessionalAchievements == true ? "avoid" : "auto";                    
+    this.cssValueForPageBreakInsideReferences = this.resumeData.avoidPageBreakInsideReferences == true ? "avoid" : "auto";    
+  }
+
+  setCssValues(){
+    this.cssValueForPageBreakInsideAcademicAchievements = this.resumeData.avoidPageBreakInsideAcademicAchievements == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideAcademicDegrees = this.resumeData.avoidPageBreakInsideAcademicDegrees == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideExperienceData = this.resumeData.avoidPageBreakInsideExperienceData == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideGithubProjects = this.resumeData.avoidPageBreakInsideGithubProjects == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideLanguageProficiency = this.resumeData.avoidPageBreakInsideLanguageProficiency == true ? "avoid" : "auto";
+    this.cssValueForPageBreakInsideProfessionalAchievements = this.resumeData.avoidPageBreakInsideProfessionalAchievements == true ? "avoid" : "auto";                    
+    this.cssValueForPageBreakInsideReferences = this.resumeData.avoidPageBreakInsideReferences == true ? "avoid" : "auto";    
   }
 
   convert_YYYYMMDD_to_DDMMMYYYY(dateString: string){
@@ -94,6 +120,19 @@ export class Step2Component implements OnInit {
 
   print(){
     window.print()
+  }
+
+  //ref: https://ng-bootstrap.github.io/#/components/modal/examples
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log("here 1")
+      console.log(this.resumeData)
+      this.setCssValues()
+    }, (reason) => {
+      console.log("here 2")
+      console.log(this.resumeData)
+      this.setCssValues()
+    });
   }
 
 }

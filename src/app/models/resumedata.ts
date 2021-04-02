@@ -22,12 +22,19 @@ export class ResumeData {
         githubProfileLink!: string
         upworkProfileLink!: string
         githubProjects!: GithubProject[]
+        avoidPageBreakInsideGithubProjects: boolean
         languageProficiency!: LanguageProficiency[]
+        avoidPageBreakInsideLanguageProficiency: boolean        
         professionalExperience!: ExperienceData[]
+        avoidPageBreakInsideExperienceData: boolean        
         academicDegrees!: AcademicData[]
+        avoidPageBreakInsideAcademicDegrees: boolean        
         academicAchievements!: AcademicAchievement[]
+        avoidPageBreakInsideAcademicAchievements: boolean        
         professionalAchievements!: ProfessionalAchievement[]        
+        avoidPageBreakInsideProfessionalAchievements: boolean        
         references!: Reference[]
+        avoidPageBreakInsideReferences: boolean        
 
         constructor() { 
                 this.professionalExperience = [];
@@ -36,7 +43,15 @@ export class ResumeData {
                 this.professionalAchievements = [];
                 this.references = [];
                 this.githubProjects = [];
-                this.languageProficiency = [];           
+                this.languageProficiency = [];   
+                
+                this.avoidPageBreakInsideGithubProjects = false
+                this.avoidPageBreakInsideLanguageProficiency = false
+                this.avoidPageBreakInsideExperienceData = false
+                this.avoidPageBreakInsideAcademicDegrees = false
+                this.avoidPageBreakInsideAcademicAchievements = false
+                this.avoidPageBreakInsideProfessionalAchievements = false
+                this.avoidPageBreakInsideReferences = false                                                                
         }
 
 }

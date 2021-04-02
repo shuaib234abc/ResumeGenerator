@@ -20,6 +20,14 @@ a.deleteLink:hover{
   text-decoration: none;
 }
 
+.modal-dialog{
+  max-width:70%;
+}
+
+#div_modalBodyForPrintSettings table td{
+  border:0px;
+}
+
 #div_to_print, #div_to_print * {
   font-family: "Times New Roman" !important;
 }
