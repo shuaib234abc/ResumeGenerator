@@ -57,28 +57,22 @@
                       </tr>
                       <tr>
                           <td>
-                              <table style="width:95%;margin:0px auto">
-                                    <tbody>
-                                      <tr *ngFor="let d of resumeData['professionalExperience']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
-                                        <td style="width:10%;padding-top:3%">{{ i + 1 }}</td>
-                                        <td style="width:90%;padding-top:3%">
-                                          
-                                          <span>
-                                            <span style="font-weight:650">{{ d.designationHeld }}</span> at <span style="font-weight:650;color:#7777ac;">{{ d.companyName }}</span>
-                                          </span>
-                                          <br />
-                                          <span style="text-decoration: underline;">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
-                                          <br />
-                                          <span style="text-decoration: underline;">Responsibilities:</span>
-                                          <br />
-                                          <ul>
-                                            <li *ngFor="let r of d['employmentRoleDescAsArr']; ">{{r}}</li>
-                                          </ul>
-                                        </td>
+                                <div style="width:95%;margin:0px auto">
+                                      <div style="padding-top:3%" *ngFor="let d of resumeData['professionalExperience']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                        <span>
+                                          <span style="font-weight:650">{{ d.designationHeld }}</span> at <span style="font-weight:650;color:#7777ac;">{{ d.companyName }}</span>
+                                        </span>
+                                        <br />
+                                        <span style="text-decoration: underline;">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
+                                        <br />
+                                        <span style="text-decoration: underline;">Responsibilities:</span>
+                                        <br />
+                                        <ul>
+                                          <li *ngFor="let r of d['employmentRoleDescAsArr']; ">{{r}}</li>
+                                        </ul>                                        
 
-                                      </tr>
-                                    </tbody>
-                              </table>
+                                      </div>
+                                </div>
                           </td>
                       </tr>
                   </table>          

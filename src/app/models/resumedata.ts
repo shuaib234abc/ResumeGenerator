@@ -14,6 +14,11 @@ export class ResumeData {
         photo!: any
         careerObjective!: string
         careerSummary!: string        
+        linkedInProfleLink!: string
+        skypeName!: string
+        hackerRankProfileLink!: string
+        githubProfileLink!: string
+        upworkProfileLink!: string
         professionalExperience!: ExperienceData[]
         academicDegrees!: AcademicData[]
         academicAchievements!: AcademicAchievement[]
