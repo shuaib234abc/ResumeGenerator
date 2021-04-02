@@ -1,6 +1,8 @@
 import { AcademicAchievement } from "./academicachievement"
 import { AcademicData } from "./academicdata"
 import { ExperienceData } from "./experiencedata"
+import { GithubProject } from "./githubproject"
+import { LanguageProficiency } from "./languageproficiency"
 import { ProfessionalAchievement } from "./professionalachievement"
 import { Reference } from "./reference"
 
@@ -19,6 +21,8 @@ export class ResumeData {
         hackerRankProfileLink!: string
         githubProfileLink!: string
         upworkProfileLink!: string
+        githubProjects!: GithubProject[]
+        languageProficiency!: LanguageProficiency[]
         professionalExperience!: ExperienceData[]
         academicDegrees!: AcademicData[]
         academicAchievements!: AcademicAchievement[]
@@ -31,6 +35,8 @@ export class ResumeData {
                 this.academicAchievements = [];
                 this.professionalAchievements = [];
                 this.references = [];
+                this.githubProjects = [];
+                this.languageProficiency = [];           
         }
 
 }

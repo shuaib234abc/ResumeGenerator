@@ -19,13 +19,25 @@
                     <table style="width:100%;margin-bottom:6%">
                       <tr>
                         <td style="width:80%">
-                          <span style="font-size:1.4em; text-transform: uppercase; font-weight:800">{{ resumeData.fullName }}</span>
-                          <br />
-                          <span style="font-size:1.05em;">Email: {{ resumeData.emailAddr }}</span> 
-                          <br />
-                          <span style="font-size:1.05em;">Contact number: {{ combinedContactNumber }}</span>   
-                          <br />
-                          <span style="font-size:1.05em;">{{ resumeData.mailingAddr }}</span>                            
+                          <div style="font-size:1.4em; text-transform: uppercase; font-weight:800">{{ resumeData.fullName }}</div>                          
+                          <div style="font-size:1.05em;">Email: {{ resumeData.emailAddr }}</div>                           
+                          <div style="font-size:1.05em;">Contact number: {{ combinedContactNumber }}</div>                             
+                          <div style="font-size:1.05em;">{{ resumeData.mailingAddr }}</div>                            
+                          <div style="font-size:1.05em;" [hidden]="resumeData.linkedInProfleLink == null">
+                            LinkedIn : <a target="_blank" href="{{resumeData.linkedInProfleLink}}">{{resumeData.linkedInProfleLink}}</a>
+                          </div>
+                          <div style="font-size:1.05em;" [hidden]="resumeData.skypeName == null">
+                            Skype : {{resumeData.skypeName}}
+                          </div>                          
+                          <div style="font-size:1.05em;" [hidden]="resumeData.hackerRankProfileLink == null">
+                            HackerRank : <a target="_blank" href="{{resumeData.hackerRankProfileLink}}">{{resumeData.hackerRankProfileLink}}</a>
+                          </div>                          
+                          <div style="font-size:1.05em;" [hidden]="resumeData.githubProfileLink == null">
+                            GitHub : <a target="_blank" href="{{resumeData.githubProfileLink}}">{{resumeData.githubProfileLink}}</a>
+                          </div>  
+                          <div style="font-size:1.05em;" [hidden]="resumeData.upworkProfileLink == null">
+                            Upwork : <a target="_blank" href="{{resumeData.upworkProfileLink}}">{{resumeData.upworkProfileLink}}</a>
+                          </div>                                                      
                         </td>  
                         <td style="width:20%">
                           <img style="width:100%" src="{{ resumeData.photo }}" />
@@ -33,7 +45,7 @@
                       </tr>
                   </table>
 
-                  <table style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.careerObjective.length <= 0" style="width:100%;margin-bottom:6%">
                     <tr>
                         <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">CAREER OBJECTIVE</td>
                     </tr>
@@ -42,7 +54,7 @@
                     </tr>
                   </table>
 
-                  <table style="width:100%;;margin-bottom:6%">
+                  <table [hidden]="resumeData.careerSummary.length <= 0" style="width:100%;;margin-bottom:6%">
                       <tr>
                           <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">CAREER SUMMARY</td>
                       </tr>
@@ -51,33 +63,53 @@
                       </tr>
                   </table>
                              
-                  <table style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.githubProjects.length <= 0" style="width:100%;margin-bottom:6%">
                       <tr>
-                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">EMPLOYMENT HISTORY</td>
+                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Featured Personal Projects</td>
                       </tr>
-                      <tr>
-                          <td>
+                      <tr *ngFor="let d of resumeData['githubProjects']">
+                          <td style="padding-top:3%">
                                 <div style="width:95%;margin:0px auto">
-                                      <div style="padding-top:3%" *ngFor="let d of resumeData['professionalExperience']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
-                                        <span>
-                                          <span style="font-weight:650">{{ d.designationHeld }}</span> at <span style="font-weight:650;color:#7777ac;">{{ d.companyName }}</span>
-                                        </span>
-                                        <br />
-                                        <span style="text-decoration: underline;">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
-                                        <br />
-                                        <span style="text-decoration: underline;">Responsibilities:</span>
-                                        <br />
-                                        <ul>
-                                          <li *ngFor="let r of d['employmentRoleDescAsArr']; ">{{r}}</li>
-                                        </ul>                                        
 
-                                      </div>
+                                        <span style="font-weight:650;font-weight:650;color:#7777ac;"><a target="_blank" href="{{d.link}}">{{ d.projectTitle }}</a></span>
+                                        <br />
+                                        <span style="font-weight:650;">Github link:</span> <a target="_blank" href="{{d.link}}">{{ d.link }}</a>
+                                        <br />
+                                        <span style="font-weight:650;">Technology used:</span> {{d.technologyUsed}}
+                                        <br />
+                                        {{d.description}}                                        
+
                                 </div>
                           </td>
                       </tr>
-                  </table>          
+                  </table>      
                   
-                  <table style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.professionalExperience.length <= 0" style="width:100%;margin-bottom:6%">
+                    <tr>
+                        <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">EMPLOYMENT HISTORY</td>
+                    </tr>
+                    <tr *ngFor="let d of resumeData['professionalExperience']">
+                        <td style="padding-top:3%">
+                              <div style="width:95%;margin:0px auto">
+
+                                      <span>
+                                        <span style="font-weight:650">{{ d.designationHeld }}</span> at <span style="font-weight:650;color:#7777ac;">{{ d.companyName }}</span>
+                                      </span>
+                                      <br />
+                                      <span style="text-decoration: underline;">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
+                                      <br />
+                                      <span style="text-decoration: underline;">Responsibilities:</span>
+                                      <br />
+                                      <ul>
+                                        <li *ngFor="let r of d['employmentRoleDescAsArr']; ">{{r}}</li>
+                                      </ul>                                        
+
+                              </div>
+                        </td>
+                    </tr>
+                </table>                        
+                  
+                  <table [hidden]="resumeData.academicDegrees.length <= 0" style="width:100%;margin-bottom:6%">
                       <tr>
                           <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">ACADEMIC QUALIFICATIONS</td>
                       </tr>
@@ -155,12 +187,13 @@
 
                   <table [hidden]="resumeData.references.length <= 0" style="width:100%;margin-bottom:6%">
                     <tr>
+                      <!-- ref: https://www.w3schools.com/cssref/pr_print_pagebi.asp -->
                       <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">References</td>
                     </tr>
-                    <tr>
-                        <td>
+                    <tr *ngFor="let d of resumeData['references']">
+                        <td style="padding-top:3%">
 
-                          <div *ngFor="let d of resumeData['references']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                          <div>
                             <div style="font-weight:650;font-weight:650;color:#7777ac;">{{ d.referenceName }}</div>
                             <div>{{d.referenceDesignation}} at {{d.referenceCompany}}</div>
                             <div>

@@ -13,8 +13,6 @@ export class Step2Component implements OnInit {
 
   constructor() {
 
-    console.log("here 1");
-
     this.combinedContactNumber = ""
 
     var tmp = localStorage.getItem("resumeData");
@@ -33,7 +31,7 @@ export class Step2Component implements OnInit {
     for(var i = 0; i < this.resumeData.professionalExperience.length; i++){
 
       let tmp = this.resumeData.professionalExperience[i].employmentRoleDesc;
-      let tmpArray = tmp.split(". ");
+      let tmpArray = tmp.split("\n");
       this.resumeData.professionalExperience[i].employmentRoleDescAsArr = tmpArray
 
       let regExForDate = /^(\d){4}-(\d){2}-(\d){2}$/
@@ -46,9 +44,6 @@ export class Step2Component implements OnInit {
         this.resumeData.professionalExperience[i].employmentTo = this.convert_YYYYMMDD_to_DDMMMYYYY(this.resumeData.professionalExperience[i].employmentTo);
       }
     }
-
-    console.log("here 2");
-    console.log(this.resumeData);
   }
 
   convert_YYYYMMDD_to_DDMMMYYYY(dateString: string){

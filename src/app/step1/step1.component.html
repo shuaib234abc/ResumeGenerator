@@ -34,7 +34,27 @@
                             <div class="form-group">
                                 <label for="photo">Photo</label>
                                 <input type="file" class="form-control" id="photo" formControlName="photo" (change)="photoFormControlChanged($event)" >
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedInProfleLink">LinkedIn profile URL</label>
+                                <input type="text" class="form-control" id="linkedInProfleLink" formControlName="linkedInProfleLink">
                             </div>                     
+                            <div class="form-group">
+                                <label for="skypeName">Skype name</label>
+                                <input type="text" class="form-control" id="skypeName" formControlName="skypeName">
+                            </div>
+                            <div class="form-group">
+                                <label for="hackerRankProfileLink">HackerRank profile URL</label>
+                                <input type="text" class="form-control" id="hackerRankProfileLink" formControlName="hackerRankProfileLink">
+                            </div>
+                            <div class="form-group">
+                                <label for="githubProfileLink">Github URL</label>
+                                <input type="text" class="form-control" id="githubProfileLink" formControlName="githubProfileLink">
+                            </div>
+                            <div class="form-group">
+                                <label for="upworkProfileLink">Upwork profile link</label>
+                                <input type="text" class="form-control" id="upworkProfileLink" formControlName="upworkProfileLink">
+                            </div>
                         </ng-template>
                     </ngb-panel>
                     <ngb-panel title="Address details">
@@ -246,6 +266,97 @@
                             </table>                                                                                         
                         </ng-template>
                     </ngb-panel>
+                    <ngb-panel title="Programming language / tools proficiency">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                    <label for="languageProficiencyName">Name of programming language / tool</label>
+                                    <input type="text" class="form-control" id="languageProficiencyName" formControlName="languageProficiencyName">
+                            </div>
+                            <div class="form-group">
+                                <label for="languageProficiencyType">Type</label>
+                                <select class="form-control" id="languageProficiencyType" formControlName="languageProficiencyType">
+                                    <option>Please Select</option>
+                                    <option value="Programming language (frontend)">Programming language (frontend)</option>
+                                    <option value="Programming language (backend)">Programming language (backend)</option>    
+                                    <option value="Frameworks">Frameworks</option>                                    
+                                    <option value="Database">Database</option>                                    
+                                    <option value="Operating System">Operating System</option>                                    
+                                    <option value="IDE">IDE</option>                                    
+                                    <option value="Other Tools">Other Tools</option>                                    
+                                    <option value="Shell Scripting">Shell Scripting</option>                                    
+                                </select>
+                            </div>                      
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" (click)="addLanguageProficiency($event)">Add this information</button>
+                            </div>      
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Type</th>                                    
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['languageProficiency']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ d.name }}</td>
+                                    <td>{{ d.type }}</td>
+                                    <td>
+                                      <a class="deleteLink" (click)="deleteLanguageProficiency($event, i)">X</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>                                                                                
+                        </ng-template>
+                    </ngb-panel>
+                    <ngb-panel title="Github projects">
+                        <ng-template ngbPanelContent>
+                            <div class="form-group">
+                                    <label for="githubPrjTitle">Project title</label>
+                                    <input type="text" class="form-control" id="githubPrjTitle" formControlName="githubPrjTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="githubPrjLink">Link</label>
+                                <input type="text" class="form-control" id="githubPrjLink" formControlName="githubPrjLink">
+                            </div>                      
+                            <div class="form-group">
+                                <label for="githubPrjDesc">Description</label>
+                                <textarea rows="5" cols="8" class="form-control" id="githubPrjDesc" formControlName="githubPrjDesc"></textarea>
+                            </div>   
+                            <div class="form-group">
+                                <label for="githubPrjTechUsed">Technology used</label>
+                                <input type="text" class="form-control" id="githubPrjTechUsed" formControlName="githubPrjTechUsed">
+                            </div>      
+                                
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" (click)="addGithubPrj($event)">Add this information</button>
+                            </div>      
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Technology</th>                                    
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['githubProjects']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ i + 1 }}</td>
+                                    <td><a target="_blank" href="{{d.link}}">{{ d.projectTitle }}</a></td>
+                                    <td>{{ d.description }}</td>
+                                    <td>{{ d.technologyUsed }}</td>
+                                    <td>
+                                      <a class="deleteLink" (click)="deleteGithubPrj($event, i)">X</a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>                                           
+                        </ng-template>
+                    </ngb-panel>                      
                     <ngb-panel title="References">
                         <ng-template ngbPanelContent>
                             <div class="form-group">

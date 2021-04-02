@@ -9,3 +9,6 @@ Reactive forms
 
 UX design
 1. https://material.io/resources/color/
+
+HTML / CSS
+1. https://www.w3schools.com/

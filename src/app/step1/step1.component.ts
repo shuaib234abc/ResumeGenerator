@@ -17,6 +17,8 @@ import { ProfessionalAchievement } from '../models/professionalachievement';
 import { Reference } from '../models/reference';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { LanguageProficiency } from '../models/languageproficiency';
+import { GithubProject } from '../models/githubproject';
 
 @Component({
   selector: 'app-step1',
@@ -45,7 +47,6 @@ export class Step1Component implements OnInit {
    reader.readAsDataURL(file);
    reader.onload = function () {
      __thisObj.resumeData.photo = reader.result;
-     console.log(reader.result);
    };
    reader.onerror = function (error) {
      console.log('Error: ', error);
@@ -54,8 +55,7 @@ export class Step1Component implements OnInit {
 
   //ref: https://www.freecodecamp.org/news/how-to-validate-angular-reactive-forms/
   onDataFormSubmit() {
-    //alert(2)
-
+    
     this.resumeData.careerObjective = this.dataFormControls.careerObjective.value
     this.resumeData.careerSummary = this.dataFormControls.careerSummary.value
     this.resumeData.contactNumber1 = this.dataFormControls.contactNumber1.value
@@ -63,6 +63,11 @@ export class Step1Component implements OnInit {
     this.resumeData.emailAddr = this.dataFormControls.emailAddr.value
     this.resumeData.fullName = this.dataFormControls.fullName.value
     this.resumeData.mailingAddr = this.dataFormControls.mailingAddr.value    
+    this.resumeData.linkedInProfleLink = this.dataFormControls.linkedInProfleLink.value
+    this.resumeData.skypeName = this.dataFormControls.skypeName.value
+    this.resumeData.hackerRankProfileLink = this.dataFormControls.hackerRankProfileLink.value
+    this.resumeData.githubProfileLink = this.dataFormControls.githubProfileLink.value
+    this.resumeData.upworkProfileLink = this.dataFormControls.upworkProfileLink.value    
     
     // ref: https://www.w3schools.com/html/html5_webstorage.asp
     localStorage.setItem("resumeData", JSON.stringify( this.resumeData ));
@@ -70,6 +75,40 @@ export class Step1Component implements OnInit {
     // ref: https://stackoverflow.com/questions/47133610/angular-manual-redirect-to-route
     this.router.navigate(['/step2'])
 
+  }
+
+  deleteGithubPrj(event: any, index: number){
+    this.resumeData.githubProjects.splice(index, 1)
+  }
+
+  addGithubPrj(event: any){
+    let __data = new GithubProject()
+    __data.projectTitle = this.dataFormControls.githubPrjTitle.value
+    __data.link = this.dataFormControls.githubPrjLink.value
+    __data.description = this.dataFormControls.githubPrjDesc.value    
+    __data.technologyUsed = this.dataFormControls.githubPrjTechUsed.value               
+
+    this.resumeData.githubProjects.push(__data)
+
+    this.dataFormControls.githubPrjTitle.setValue('')
+    this.dataFormControls.githubPrjLink.setValue('')
+    this.dataFormControls.githubPrjDesc.setValue('')
+    this.dataFormControls.githubPrjTechUsed.setValue('')    
+  }
+
+  deleteLanguageProficiency(event: any, index: number){
+    this.resumeData.languageProficiency.splice(index, 1)
+  }
+
+  addLanguageProficiency(event: any){
+    let __data = new LanguageProficiency()
+    __data.name = this.dataFormControls.languageProficiencyName.value
+    __data.type = this.dataFormControls.languageProficiencyType.value               
+
+    this.resumeData.languageProficiency.push(__data)
+
+    this.dataFormControls.languageProficiencyName.setValue('')
+    this.dataFormControls.languageProficiencyType.setValue('')
   }
 
   deleteReference(event: any, index: number){
@@ -199,6 +238,11 @@ export class Step1Component implements OnInit {
         photo: new FormControl(''),
         careerObjective: new FormControl(''),
         careerSummary: new FormControl(''),
+        linkedInProfleLink: new FormControl(''),
+        skypeName: new FormControl(''),
+        hackerRankProfileLink: new FormControl(''),
+        githubProfileLink: new FormControl(''),
+        upworkProfileLink: new FormControl(''),
         companyName: new FormControl(''),
         companyLocation: new FormControl(''),
         designationHeld: new FormControl(''),
@@ -221,7 +265,13 @@ export class Step1Component implements OnInit {
         referenceCompany: new FormControl(''),
         referenceRelationTo: new FormControl(''),
         referenceEmailAddr: new FormControl(''),
-        referenceContactNumber: new FormControl(''),                                                                                                                        
+        referenceContactNumber: new FormControl(''),  
+        languageProficiencyName: new FormControl(''),
+        languageProficiencyType: new FormControl(''),
+        githubPrjTitle: new FormControl(''),
+        githubPrjLink: new FormControl(''),
+        githubPrjDesc: new FormControl(''),
+        githubPrjTechUsed: new FormControl(''),                                                                                                                        
       }
     );
   }
@@ -239,10 +289,12 @@ export class Step1Component implements OnInit {
     this.resumeData.contactNumber2 = this.dataFormControls.contactNumber2.value
     this.resumeData.emailAddr = this.dataFormControls.emailAddr.value
     this.resumeData.fullName = this.dataFormControls.fullName.value
-    this.resumeData.mailingAddr = this.dataFormControls.mailingAddr.value    
-
-    //console.log(this.resumeData)
-    //return
+    this.resumeData.mailingAddr = this.dataFormControls.mailingAddr.value  
+    this.resumeData.linkedInProfleLink = this.dataFormControls.linkedInProfleLink.value
+    this.resumeData.skypeName = this.dataFormControls.skypeName.value
+    this.resumeData.hackerRankProfileLink = this.dataFormControls.hackerRankProfileLink.value
+    this.resumeData.githubProfileLink = this.dataFormControls.githubProfileLink.value
+    this.resumeData.upworkProfileLink = this.dataFormControls.upworkProfileLink.value        
 
     this.generateDataLinkClicked = true
     this.downloadLinkClicked = false
@@ -256,7 +308,6 @@ export class Step1Component implements OnInit {
   downloadFile(){
     this.generateDataLinkClicked = false
     this.downloadLinkClicked = false
-    //alert("456")
   }
 
   onUploadedJsonFileChanged(event: any){
@@ -277,7 +328,10 @@ export class Step1Component implements OnInit {
       if(fileReadResult == null || fileReadResult == undefined) fileReadResult = ""
       var jsonData = JSON.parse(fileReadResult)
 
-      this.resumeData = jsonData
+      var resumeDataAsDefaultObj = jsonData
+      
+      //ref: https://stackoverflow.com/questions/5873624/parse-json-string-into-a-particular-object-prototype-in-javascript
+      this.resumeData = Object.assign(new ResumeData, resumeDataAsDefaultObj)
 
       this.dataFormControls.fullName.setValue(this.resumeData.fullName)
       this.dataFormControls.emailAddr.setValue(this.resumeData.emailAddr)
@@ -286,6 +340,11 @@ export class Step1Component implements OnInit {
       this.dataFormControls.mailingAddr.setValue(this.resumeData.mailingAddr)
       this.dataFormControls.careerObjective.setValue(this.resumeData.careerObjective)
       this.dataFormControls.careerSummary.setValue(this.resumeData.careerSummary)
+      this.dataFormControls.linkedInProfleLink.setValue(this.resumeData.linkedInProfleLink)
+      this.dataFormControls.skypeName.setValue(this.resumeData.skypeName)
+      this.dataFormControls.hackerRankProfileLink.setValue(this.resumeData.hackerRankProfileLink)
+      this.dataFormControls.githubProfileLink.setValue(this.resumeData.githubProfileLink)
+      this.dataFormControls.upworkProfileLink.setValue(this.resumeData.upworkProfileLink)
 
     }
     fileReader.onerror = (error) => {

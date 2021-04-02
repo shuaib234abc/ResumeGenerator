@@ -35,8 +35,8 @@ a.deleteLink:hover{
       font-family: "Times New Roman" !important;
     }
     #div_to_print {
-      position: fixed;
+      position: absolute;
       left: 0;
       top: 0;
     }
-  }
+}
