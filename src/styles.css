@@ -11,6 +11,15 @@
     background-color:#e1f5fe;
 }
 
+a.deleteLink{
+  font-size:1.2em;
+  color:#ff0000;
+  cursor:pointer;
+}
+a.deleteLink:hover{
+  text-decoration: none;
+}
+
 #div_to_print, #div_to_print * {
   font-family: "Times New Roman" !important;
 }
