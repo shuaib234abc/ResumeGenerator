@@ -1,6 +1,11 @@
 # ResumeGeneratorV1
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
+- This is an Angular 11 app to generate a Curriculum Vitae or Resume.
+- The user fills up a form and sees the resume generated on the next page, in a professional and attractive style.
+- The user can print the resume.
+- There is also option to save your resume data to your PC
+- This applicaton is made entirely using Angular 11, no server side technology has been used.
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
 
 ## Development server
 
