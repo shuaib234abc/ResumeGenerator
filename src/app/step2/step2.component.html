@@ -59,32 +59,32 @@
 
               <hr />
 
-              <div style="width:95%;margin:0px auto;border:1px solid #ccc">
+              <div id="container_for_printable_div">
 
                 <div id="div_to_print">
 
-                  <div style="padding:2%">
+                  <div>
 
-                    <table style="width:100%;margin-bottom:6%">
+                    <table class="cv_section">
                       <tr>
                         <td style="width:80%">
-                          <div style="font-size:1.4em; text-transform: uppercase; font-weight:800">{{ resumeData.fullName }}</div>                          
-                          <div style="font-size:1.05em;">Email: {{ resumeData.emailAddr }}</div>                           
-                          <div style="font-size:1.05em;">Contact number: {{ combinedContactNumber }}</div>                             
-                          <div style="font-size:1.05em;">{{ resumeData.mailingAddr }}</div>                            
-                          <div style="font-size:1.05em;" [hidden]="resumeData.linkedInProfleLink == null">
+                          <div class="main_heading">{{ resumeData.fullName }}</div>                          
+                          <div class="prominent_text">Email: {{ resumeData.emailAddr }}</div>                           
+                          <div class="prominent_text">Contact number: {{ combinedContactNumber }}</div>                             
+                          <div class="prominent_text">{{ resumeData.mailingAddr }}</div>                            
+                          <div class="prominent_text" [hidden]="resumeData.linkedInProfleLink == null">
                             LinkedIn : <a target="_blank" href="{{resumeData.linkedInProfleLink}}">{{resumeData.linkedInProfleLink}}</a>
                           </div>
-                          <div style="font-size:1.05em;" [hidden]="resumeData.skypeName == null">
+                          <div class="prominent_text" [hidden]="resumeData.skypeName == null">
                             Skype : {{resumeData.skypeName}}
                           </div>                          
-                          <div style="font-size:1.05em;" [hidden]="resumeData.hackerRankProfileLink == null">
+                          <div class="prominent_text" [hidden]="resumeData.hackerRankProfileLink == null">
                             HackerRank : <a target="_blank" href="{{resumeData.hackerRankProfileLink}}">{{resumeData.hackerRankProfileLink}}</a>
                           </div>                          
-                          <div style="font-size:1.05em;" [hidden]="resumeData.githubProfileLink == null">
+                          <div class="prominent_text" [hidden]="resumeData.githubProfileLink == null">
                             GitHub : <a target="_blank" href="{{resumeData.githubProfileLink}}">{{resumeData.githubProfileLink}}</a>
                           </div>  
-                          <div style="font-size:1.05em;" [hidden]="resumeData.upworkProfileLink == null">
+                          <div class="prominent_text" [hidden]="resumeData.upworkProfileLink == null">
                             Upwork : <a target="_blank" href="{{resumeData.upworkProfileLink}}">{{resumeData.upworkProfileLink}}</a>
                           </div>                                                      
                         </td>  
@@ -94,37 +94,37 @@
                       </tr>
                   </table>
 
-                  <table [hidden]="resumeData.careerObjective.length <= 0" style="width:100%;margin-bottom:6%">
+                  <table [hidden]="resumeData.careerObjective.length <= 0" class="cv_section">
                     <tr>
-                        <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">CAREER OBJECTIVE</td>
+                        <td class="cv_section_heading">CAREER OBJECTIVE</td>
                     </tr>
                     <tr>
                         <td>{{ resumeData.careerObjective }}</td>
                     </tr>
                   </table>
 
-                  <table [hidden]="resumeData.careerSummary.length <= 0" style="width:100%;;margin-bottom:6%">
+                  <table [hidden]="resumeData.careerSummary.length <= 0" class="cv_section">
                       <tr>
-                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">CAREER SUMMARY</td>
+                          <td class="cv_section_heading">CAREER SUMMARY</td>
                       </tr>
                       <tr>
                           <td>{{ resumeData.careerSummary }}</td>
                       </tr>
                   </table>
                              
-                  <table [hidden]="resumeData.githubProjects.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideGithubProjects}">
+                  <table [hidden]="resumeData.githubProjects.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideGithubProjects}">
                       <tr>
-                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Featured Personal Projects</td>
+                          <td class="cv_section_heading">Featured Personal Projects</td>
                       </tr>
                       <tr *ngFor="let d of resumeData['githubProjects']">
                           <td style="padding-top:3%">
                                 <div style="width:95%;margin:0px auto">
 
-                                        <span style="font-weight:650;font-weight:650;color:#7777ac;"><a target="_blank" href="{{d.link}}">{{ d.projectTitle }}</a></span>
+                                        <span class="span_title"><a target="_blank" href="{{d.link}}">{{ d.projectTitle }}</a></span>
                                         <br />
-                                        <span style="font-weight:650;">Github link:</span> <a target="_blank" href="{{d.link}}">{{ d.link }}</a>
+                                        <span class="span_bolder">Github link:</span> <a target="_blank" href="{{d.link}}">{{ d.link }}</a>
                                         <br />
-                                        <span style="font-weight:650;">Technology used:</span> {{d.technologyUsed}}
+                                        <span class="span_bolder">Technology used:</span> {{d.technologyUsed}}
                                         <br />
                                         {{d.description}}                                        
 
@@ -133,21 +133,21 @@
                       </tr>
                   </table>      
                   
-                  <table [hidden]="resumeData.professionalExperience.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideExperienceData}">
+                  <table [hidden]="resumeData.professionalExperience.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideExperienceData}">
                     <tr>
-                        <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">EMPLOYMENT HISTORY</td>
+                        <td class="cv_section_heading">EMPLOYMENT HISTORY</td>
                     </tr>
                     <tr *ngFor="let d of resumeData['professionalExperience']">
                         <td style="padding-top:3%">
                               <div style="width:95%;margin:0px auto">
 
                                       <span>
-                                        <span style="font-weight:650">{{ d.designationHeld }}</span> at <span style="font-weight:650;color:#7777ac;">{{ d.companyName }}</span>
+                                        <span class="span_bolder">{{ d.designationHeld }}</span> at <span class="span_title">{{ d.companyName }}</span>
                                       </span>
                                       <br />
-                                      <span style="text-decoration: underline;">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
+                                      <span class="underlined_text">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
                                       <br />
-                                      <span style="text-decoration: underline;">Responsibilities:</span>
+                                      <span class="underlined_text">Responsibilities:</span>
                                       <br />
                                       <ul>
                                         <li *ngFor="let r of d['employmentRoleDescAsArr']; ">{{r}}</li>
@@ -158,27 +158,27 @@
                     </tr>
                 </table>                        
                   
-                  <table [hidden]="resumeData.academicDegrees.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicDegrees}">
+                  <table [hidden]="resumeData.academicDegrees.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicDegrees}">
                       <tr>
-                          <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">ACADEMIC QUALIFICATIONS</td>
+                          <td class="cv_section_heading">ACADEMIC QUALIFICATIONS</td>
                       </tr>
                       <tr>
                           <td>
-                              <table style="width:95%;margin:0px auto;margin-top:4%">
+                              <table class="custom_bordered_table">
                                   <thead>
                                       <tr>
-                                        <th style="border:1px solid #ccc;padding:2%">Exam tile</th>
-                                        <th style="border:1px solid #ccc;padding:2%">Institution</th>
-                                        <th style="border:1px solid #ccc;padding:2%">Result</th>
-                                        <th style="border:1px solid #ccc;padding:2%">Passing year</th>           
+                                        <th>Exam tile</th>
+                                        <th>Institution</th>
+                                        <th>Result</th>
+                                        <th>Passing year</th>           
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr *ngFor="let d of resumeData['academicDegrees']">
-                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicExamTitle }}</td>
-                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicInstitution }}</td>
-                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicResult }}</td>
-                                        <td style="border:1px solid #ccc;padding:2%">{{ d.academicPassingYear }}
+                                        <td>{{ d.academicExamTitle }}</td>
+                                        <td>{{ d.academicInstitution }}</td>
+                                        <td>{{ d.academicResult }}</td>
+                                        <td>{{ d.academicPassingYear }}
                                       </tr>
                                     </tbody>
                               </table>
@@ -186,19 +186,19 @@
                       </tr>
                   </table>       
                   
-                  <table [hidden]="resumeData.academicAchievements.length <= 0" style="width:100%;margin-bottom:6%"   [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicAchievements}">
+                  <table [hidden]="resumeData.academicAchievements.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicAchievements}">
                     <tr>
-                      <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Academic / Extra Curricular achievements</td>
+                      <td class="cv_section_heading">Academic / Extra Curricular achievements</td>
                     </tr>
                     <tr>
                         <td>
-                            <table style="width:95%;margin:0px auto;margin-top:1%">
+                            <table class="custom_two_col_table">
                               <tbody>
                                 <tr *ngFor="let d of resumeData['academicAchievements']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
-                                  <td style="width:10%;padding-top:3%">{{ d.academicAchievementYear }}</td>
-                                  <td style="width:90%;padding-top:3%">
+                                  <td>{{ d.academicAchievementYear }}</td>
+                                  <td>
                                     
-                                    <span style="font-weight:650;font-weight:650;color:#7777ac;">{{ d.academicAchievementTitle }}</span>
+                                    <span class="span_title">{{ d.academicAchievementTitle }}</span>
                                     <br />
                                     {{ d.academicAchievementDesc }}
                                   </td>
@@ -210,19 +210,19 @@
                     </tr>
                   </table>
 
-                  <table [hidden]="resumeData.professionalAchievements.length <= 0" style="width:100%;margin-bottom:6%"  [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideProfessionalAchievements}">
+                  <table [hidden]="resumeData.professionalAchievements.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideProfessionalAchievements}">
                     <tr>
-                      <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">Professional Achievements</td>
+                      <td class="cv_section_heading">Professional Achievements</td>
                     </tr>
                     <tr>
                         <td>
-                            <table style="width:95%;margin:0px auto;margin-top:1%">
+                            <table class="custom_two_col_table">
                               <tbody>
                                 <tr *ngFor="let d of resumeData['professionalAchievements']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
-                                  <td style="width:10%;padding-top:3%">{{ d.professionalAchievementYear }}</td>
-                                  <td style="width:90%;padding-top:3%">
+                                  <td>{{ d.professionalAchievementYear }}</td>
+                                  <td>
                                     
-                                    <span style="font-weight:650;font-weight:650;color:#7777ac;">{{ d.professionalAchievementTitle }}</span>
+                                    <span class="span_title">{{ d.professionalAchievementTitle }}</span>
                                     <br />
                                     {{ d.professionalAchievementDesc }}
                                   </td>
@@ -234,16 +234,16 @@
                     </tr>
                   </table>                    
 
-                  <table [hidden]="resumeData.references.length <= 0" style="width:100%;margin-bottom:6%" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideReferences}">
+                  <table [hidden]="resumeData.references.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideReferences}">
                     <tr>
                       <!-- ref: https://www.w3schools.com/cssref/pr_print_pagebi.asp -->
-                      <td style="border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue">References</td>
+                      <td class="cv_section_heading">References</td>
                     </tr>
                     <tr *ngFor="let d of resumeData['references']">
                         <td style="padding-top:3%">
 
                           <div>
-                            <div style="font-weight:650;font-weight:650;color:#7777ac;">{{ d.referenceName }}</div>
+                            <div class="span_title">{{ d.referenceName }}</div>
                             <div>{{d.referenceDesignation}} at {{d.referenceCompany}}</div>
                             <div>
                                 <table style="width:100%">

@@ -48,3 +48,63 @@ a.deleteLink:hover{
       top: 0;
     }
 }
+
+/* start - styles for CV */
+
+#div_to_print .main_heading{
+  font-size:1.4em; text-transform: uppercase; font-weight:800
+}
+
+#div_to_print .prominent_text{
+  font-size:1.05em;
+}
+
+#div_to_print table.cv_section{
+  width:100%;margin-bottom:6%
+}
+
+#div_to_print .cv_section_heading{
+  border-bottom:1px solid #0000ff; text-align:center; font-size:1.3em; text-transform: uppercase; font-weight:600; color:royalblue
+}
+
+#div_to_print .custom_bordered_table{
+  width:95%;margin:0px auto;margin-top:4%
+}
+
+#div_to_print .custom_bordered_table th, #div_to_print .custom_bordered_table td{
+  border:1px solid #ccc;padding:2%
+}
+
+#div_to_print .custom_two_col_table{
+  width:95%;margin:0px auto;margin-top:1%
+}
+
+#div_to_print .custom_two_col_table td:nth-child(1){
+  width:10%;padding-top:3%
+}
+
+#div_to_print .custom_two_col_table td:nth-child(2){
+  width:90%;padding-top:3%
+}
+
+#div_to_print .span_title{
+  font-weight:650;font-weight:650;color:#7777ac;
+}
+
+#div_to_print .span_bolder{
+  font-weight:650;
+}
+
+#div_to_print .underlined_text{
+  text-decoration: underline;
+}
+
+#div_to_print > div{
+  padding:2%
+}
+
+/* end - styles for CV */
+
+#container_for_printable_div{
+  width:95%;margin:0px auto;border:1px solid #ccc
+}
