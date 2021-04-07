@@ -53,6 +53,12 @@ export class Step2Component implements OnInit {
       }
     }
 
+    for(var i = 0; i < this.resumeData.languageProficiency.length; i++){
+      let tmp = this.resumeData.languageProficiency[i].name;
+      let tmpArray = tmp.split(", ");
+      this.resumeData.languageProficiency[i].names = tmpArray
+    }
+
     this.cssValueForPageBreakInsideAcademicAchievements = this.resumeData.avoidPageBreakInsideAcademicAchievements == true ? "avoid" : "auto";
     this.cssValueForPageBreakInsideAcademicDegrees = this.resumeData.avoidPageBreakInsideAcademicDegrees == true ? "avoid" : "auto";
     this.cssValueForPageBreakInsideExperienceData = this.resumeData.avoidPageBreakInsideExperienceData == true ? "avoid" : "auto";

@@ -111,6 +111,24 @@
                           <td>{{ resumeData.careerSummary }}</td>
                       </tr>
                   </table>
+
+                  <table [hidden]="resumeData.languageProficiency.length <= 0" class="cv_section" >
+                    <tr>
+                        <td class="cv_section_heading">PROGRAMMING LANGUAGES / FRAMEWORKS / TOOLS EXPERTISE</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table class="custom_bordered_table">
+                                  <tbody>
+                                    <tr *ngFor="let d of resumeData['languageProficiency']">
+                                      <td style='width:25%'>{{ d.type }}</td>
+                                      <td style='width:75%'>{{ d.name }}</td>
+                                    </tr>
+                                  </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>    
                              
                   <table [hidden]="resumeData.githubProjects.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideGithubProjects}">
                       <tr>
