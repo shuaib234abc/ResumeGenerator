@@ -9,6 +9,8 @@ import { Step1Component } from './step1/step1.component';
 import { Step2Component } from './step2/step2.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LayoutstraightComponent } from './layoutstraight/layoutstraight.component';
+import { LayoutfancyComponent } from './layoutfancy/layoutfancy.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     TopBarComponent,
     IntroductionComponent,
     Step1Component,
-    Step2Component
+    Step2Component,
+    LayoutstraightComponent,
+    LayoutfancyComponent
   ],
   imports: [
     BrowserModule,
