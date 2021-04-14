@@ -65,19 +65,36 @@
   
                     <div>
   
-                      <table class="cv_section">
+                      <table class="cv_section cv_fancy_layout">
                         <tr>
-                          <td style="width:80%">
-                            <div class="main_heading">{{ resumeData.fullName }}</div>                          
-                            <div class="prominent_text">Email: {{ resumeData.emailAddr }}</div>                           
-                            <div class="prominent_text">Contact number: {{ combinedContactNumber }}</div>                             
-                            <div class="prominent_text">{{ resumeData.mailingAddr }}</div>                            
+                          <td style="width:30%">
+
+                            <div class="photo_container">
+                              <img src="{{ resumeData.photo }}" />
+                            </div>
+          
+                            
+                            <div class="fancy_borders medium_margin_top">
+                              <div class="prominent_text">Email: {{ resumeData.emailAddr }}</div>                           
+                              <div class="prominent_text">Contact number: {{ combinedContactNumber }}</div>       
+                              <div class="prominent_text" [hidden]="resumeData.skypeName == null">
+                                Skype : {{resumeData.skypeName}}
+                              </div>                               
+                              <div class="prominent_text">{{ resumeData.mailingAddr }}</div>                                                                 
+                            </div>                          
+                                                   
+                          </td>  
+                          <td style="width:10%">
+                            &nbsp;
+                          </td>
+                          <td style="width:60%">
+
+                            <div class="main_heading">{{ resumeData.fullName }}</div>      
+
                             <div class="prominent_text" [hidden]="resumeData.linkedInProfleLink == null">
                               LinkedIn : <a target="_blank" href="{{resumeData.linkedInProfleLink}}">{{resumeData.linkedInProfleLink}}</a>
                             </div>
-                            <div class="prominent_text" [hidden]="resumeData.skypeName == null">
-                              Skype : {{resumeData.skypeName}}
-                            </div>                          
+                                                                
                             <div class="prominent_text" [hidden]="resumeData.hackerRankProfileLink == null">
                               HackerRank : <a target="_blank" href="{{resumeData.hackerRankProfileLink}}">{{resumeData.hackerRankProfileLink}}</a>
                             </div>                          
@@ -86,31 +103,34 @@
                             </div>  
                             <div class="prominent_text" [hidden]="resumeData.upworkProfileLink == null">
                               Upwork : <a target="_blank" href="{{resumeData.upworkProfileLink}}">{{resumeData.upworkProfileLink}}</a>
-                            </div>                                                      
-                          </td>  
-                          <td style="width:20%">
-                            <img style="width:100%" src="{{ resumeData.photo }}" />
+                            </div>   
+
+                            <div class="fancy_borders2 small_margin_top">
+                              <table [hidden]="resumeData.careerSummary.length <= 0" class="cv_section1">
+                                <tr>
+                                    <td class="cv_section_heading">CAREER SUMMARY</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ resumeData.careerSummary }}</td>
+                                </tr>
+                              </table>
+                            </div>
+
+                            <div class="fancy_borders2 small_margin_top">
+                              <table [hidden]="resumeData.careerObjective.length <= 0" class="cv_section1">
+                                <tr>
+                                    <td class="cv_section_heading">CAREER OBJECTIVE</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ resumeData.careerObjective }}</td>
+                                </tr>
+                              </table>
+                            </div>                            
+
                           </td>
                         </tr>
                     </table>
-  
-                    <table [hidden]="resumeData.careerObjective.length <= 0" class="cv_section">
-                      <tr>
-                          <td class="cv_section_heading">CAREER OBJECTIVE</td>
-                      </tr>
-                      <tr>
-                          <td>{{ resumeData.careerObjective }}</td>
-                      </tr>
-                    </table>
-  
-                    <table [hidden]="resumeData.careerSummary.length <= 0" class="cv_section">
-                        <tr>
-                            <td class="cv_section_heading">CAREER SUMMARY</td>
-                        </tr>
-                        <tr>
-                            <td>{{ resumeData.careerSummary }}</td>
-                        </tr>
-                    </table>
+
   
                     <table [hidden]="resumeData.languageProficiency.length <= 0" class="cv_section" >
                       <tr>

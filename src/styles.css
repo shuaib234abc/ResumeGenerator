@@ -103,6 +103,20 @@ a.deleteLink:hover{
   padding:2%
 }
 
+.cv_fancy_layout .photo_container{
+  width:90%;margin:0px auto;text-align: center;
+}
+.cv_fancy_layout .photo_container img{
+  width:65%;border-radius:50%;
+}
+
+.cv_fancy_layout .main_heading{text-align:left;margin-top:2%}
+
+.fancy_borders{border:6px solid darkgray; padding:2%; border-style:ridge;}    /* https://www.w3schools.com/css/css_border.asp */
+.fancy_borders2{border:0.15em solid #03a9f4; padding:2%; border-style:dashed;}
+.small_margin_top{margin-top:5%}
+.medium_margin_top{margin-top:8%}
+
 /* end - styles for CV */
 
 #container_for_printable_div{
