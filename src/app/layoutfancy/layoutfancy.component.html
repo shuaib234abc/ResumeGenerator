@@ -1,1 +1,298 @@
-<p>layoutfancy works!</p>
+<!-- ref: https://ng-bootstrap.github.io/#/components/modal/examples -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Settings</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" id="div_modalBodyForPrintSettings">
+  
+      <table class="table">
+          <tr>
+            <td>Academic achievement</td>
+            <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideAcademicAchievements" /> avoid page break inside this section</td>
+          </tr>
+          <tr>
+            <td>Academic degrees</td>
+            <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideAcademicDegrees" /> avoid page break inside this section</td>
+          </tr>
+          <tr>
+            <td>Employment history</td>
+            <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideExperienceData" /> avoid page break inside this section</td>
+          </tr>
+          <tr>
+            <td>Featured personal projects</td>
+            <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideGithubProjects" /> avoid page break inside this section</td>
+          </tr>
+          <tr>
+            <td>Language proficiency</td>
+            <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideLanguageProficiency" /> avoid page break inside this section</td>
+          </tr>
+          <tr>
+            <td>Professional achievement</td>
+            <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideProfessionalAchievements" /> avoid page break inside this section</td>
+          </tr>                     
+          <tr>
+            <td>References</td>
+            <td><input type="checkbox" [(ngModel)]="resumeData.avoidPageBreakInsideReferences" /> avoid page break inside this section</td>
+          </tr>                                                
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+  
+  
+  <div class="row">
+      <div class="col-12 col-md-12">
+  
+          <!-- ref: https://getbootstrap.com/docs/5.0/components/card/ -->
+          <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Step 2: View / print resume data</h5>
+                                     
+                <a (click)="print()" class="btn btn-success">Print</a>
+                &nbsp;&nbsp;
+                <a (click)="open(content)" class="btn btn-primary">Settings</a>  <!-- https://ng-bootstrap.github.io/#/components/modal/examples -->
+  
+                <hr />
+  
+                <div id="container_for_printable_div">
+  
+                  <div id="div_to_print">
+  
+                    <div>
+  
+                      <table class="cv_section">
+                        <tr>
+                          <td style="width:80%">
+                            <div class="main_heading">{{ resumeData.fullName }}</div>                          
+                            <div class="prominent_text">Email: {{ resumeData.emailAddr }}</div>                           
+                            <div class="prominent_text">Contact number: {{ combinedContactNumber }}</div>                             
+                            <div class="prominent_text">{{ resumeData.mailingAddr }}</div>                            
+                            <div class="prominent_text" [hidden]="resumeData.linkedInProfleLink == null">
+                              LinkedIn : <a target="_blank" href="{{resumeData.linkedInProfleLink}}">{{resumeData.linkedInProfleLink}}</a>
+                            </div>
+                            <div class="prominent_text" [hidden]="resumeData.skypeName == null">
+                              Skype : {{resumeData.skypeName}}
+                            </div>                          
+                            <div class="prominent_text" [hidden]="resumeData.hackerRankProfileLink == null">
+                              HackerRank : <a target="_blank" href="{{resumeData.hackerRankProfileLink}}">{{resumeData.hackerRankProfileLink}}</a>
+                            </div>                          
+                            <div class="prominent_text" [hidden]="resumeData.githubProfileLink == null">
+                              GitHub : <a target="_blank" href="{{resumeData.githubProfileLink}}">{{resumeData.githubProfileLink}}</a>
+                            </div>  
+                            <div class="prominent_text" [hidden]="resumeData.upworkProfileLink == null">
+                              Upwork : <a target="_blank" href="{{resumeData.upworkProfileLink}}">{{resumeData.upworkProfileLink}}</a>
+                            </div>                                                      
+                          </td>  
+                          <td style="width:20%">
+                            <img style="width:100%" src="{{ resumeData.photo }}" />
+                          </td>
+                        </tr>
+                    </table>
+  
+                    <table [hidden]="resumeData.careerObjective.length <= 0" class="cv_section">
+                      <tr>
+                          <td class="cv_section_heading">CAREER OBJECTIVE</td>
+                      </tr>
+                      <tr>
+                          <td>{{ resumeData.careerObjective }}</td>
+                      </tr>
+                    </table>
+  
+                    <table [hidden]="resumeData.careerSummary.length <= 0" class="cv_section">
+                        <tr>
+                            <td class="cv_section_heading">CAREER SUMMARY</td>
+                        </tr>
+                        <tr>
+                            <td>{{ resumeData.careerSummary }}</td>
+                        </tr>
+                    </table>
+  
+                    <table [hidden]="resumeData.languageProficiency.length <= 0" class="cv_section" >
+                      <tr>
+                          <td class="cv_section_heading">PROGRAMMING LANGUAGES / FRAMEWORKS / TOOLS EXPERTISE</td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <table class="custom_bordered_table">
+                                    <tbody>
+                                      <tr *ngFor="let d of resumeData['languageProficiency']">
+                                        <td style='width:25%'>{{ d.type }}</td>
+                                        <td style='width:75%'>{{ d.name }}</td>
+                                      </tr>
+                                    </tbody>
+                              </table>
+                          </td>
+                      </tr>
+                  </table>    
+                               
+                    <table [hidden]="resumeData.githubProjects.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideGithubProjects}">
+                        <tr>
+                            <td class="cv_section_heading">Featured Personal Projects</td>
+                        </tr>
+                        <tr *ngFor="let d of resumeData['githubProjects']">
+                            <td style="padding-top:3%">
+                                  <div style="width:95%;margin:0px auto">
+  
+                                          <span class="span_title"><a target="_blank" href="{{d.link}}">{{ d.projectTitle }}</a></span>
+                                          <br />
+                                          <span class="span_bolder">Github link:</span> <a target="_blank" href="{{d.link}}">{{ d.link }}</a>
+                                          <br />
+                                          <span class="span_bolder">Technology used:</span> {{d.technologyUsed}}
+                                          <br />
+                                          {{d.description}}                                        
+  
+                                  </div>
+                            </td>
+                        </tr>
+                    </table>      
+                    
+                    <table [hidden]="resumeData.professionalExperience.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideExperienceData}">
+                      <tr>
+                          <td class="cv_section_heading">EMPLOYMENT HISTORY</td>
+                      </tr>
+                      <tr *ngFor="let d of resumeData['professionalExperience']">
+                          <td style="padding-top:3%">
+                                <div style="width:95%;margin:0px auto">
+  
+                                        <span>
+                                          <span class="span_bolder">{{ d.designationHeld }}</span> at <span class="span_title">{{ d.companyName }}</span>
+                                        </span>
+                                        <br />
+                                        <span class="underlined_text">Duration:</span> {{ d.employmentFrom }} to {{ d.employmentTo }}
+                                        <br />
+                                        <span class="underlined_text">Responsibilities:</span>
+                                        <br />
+                                        <ul>
+                                          <li *ngFor="let r of d['employmentRoleDescAsArr']; ">{{r}}</li>
+                                        </ul>                                        
+  
+                                </div>
+                          </td>
+                      </tr>
+                  </table>                        
+                    
+                    <table [hidden]="resumeData.academicDegrees.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicDegrees}">
+                        <tr>
+                            <td class="cv_section_heading">ACADEMIC QUALIFICATIONS</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table class="custom_bordered_table">
+                                    <thead>
+                                        <tr>
+                                          <th>Exam tile</th>
+                                          <th>Institution</th>
+                                          <th>Result</th>
+                                          <th>Passing year</th>           
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let d of resumeData['academicDegrees']">
+                                          <td>{{ d.academicExamTitle }}</td>
+                                          <td>{{ d.academicInstitution }}</td>
+                                          <td>{{ d.academicResult }}</td>
+                                          <td>{{ d.academicPassingYear }}
+                                        </tr>
+                                      </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>       
+                    
+                    <table [hidden]="resumeData.academicAchievements.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideAcademicAchievements}">
+                      <tr>
+                        <td class="cv_section_heading">Academic / Extra Curricular achievements</td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <table class="custom_two_col_table">
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['academicAchievements']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ d.academicAchievementYear }}</td>
+                                    <td>
+                                      
+                                      <span class="span_title">{{ d.academicAchievementTitle }}</span>
+                                      <br />
+                                      {{ d.academicAchievementDesc }}
+                                    </td>
+  
+                                  </tr>
+                                </tbody>
+                              </table>
+                          </td>
+                      </tr>
+                    </table>
+  
+                    <table [hidden]="resumeData.professionalAchievements.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideProfessionalAchievements}">
+                      <tr>
+                        <td class="cv_section_heading">Professional Achievements</td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <table class="custom_two_col_table">
+                                <tbody>
+                                  <tr *ngFor="let d of resumeData['professionalAchievements']; let i=index">   <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                                    <td>{{ d.professionalAchievementYear }}</td>
+                                    <td>
+                                      
+                                      <span class="span_title">{{ d.professionalAchievementTitle }}</span>
+                                      <br />
+                                      {{ d.professionalAchievementDesc }}
+                                    </td>
+  
+                                  </tr>
+                                </tbody>
+                              </table>
+                          </td>
+                      </tr>
+                    </table>                    
+  
+                    <table [hidden]="resumeData.references.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideReferences}">
+                      <tr>
+                        <!-- ref: https://www.w3schools.com/cssref/pr_print_pagebi.asp -->
+                        <td class="cv_section_heading">References</td>
+                      </tr>
+                      <tr *ngFor="let d of resumeData['references']">
+                          <td style="padding-top:3%">
+  
+                            <div>
+                              <div class="span_title">{{ d.referenceName }}</div>
+                              <div>{{d.referenceDesignation}} at {{d.referenceCompany}}</div>
+                              <div>
+                                  <table style="width:100%">
+                                    <tr>
+                                      <td style="width:20%">Relation:</td>
+                                      <td style="width:80%">{{d.referenceRelationTo}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:20%">Contact information:</td>
+                                      <td style="width:80%">
+                                        {{d.referenceContactNumber}}
+                                        <br />
+                                        {{d.referenceEmailAddr}}
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>                              
+                            </div>
+  
+                          </td>
+                      </tr>
+                    </table>
+  
+                    </div>
+  
+                  </div>
+  
+                </div>
+  
+              </div>
+          </div>
+  
+      </div>
+  </div>

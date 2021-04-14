@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeData } from '../models/resumedata';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-layoutstraight',
@@ -19,7 +20,7 @@ export class LayoutstraightComponent implements OnInit {
   cssValueForPageBreakInsideProfessionalAchievements: string     
   cssValueForPageBreakInsideReferences: string         
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private service: CommonService) {
 
     this.combinedContactNumber = ""
 
@@ -46,10 +47,10 @@ export class LayoutstraightComponent implements OnInit {
 
       // ref: https://stackoverflow.com/questions/6603015/check-whether-a-string-matches-a-regex-in-js
       if( regExForDate.test(this.resumeData.professionalExperience[i].employmentFrom) ){
-        this.resumeData.professionalExperience[i].employmentFrom = this.convert_YYYYMMDD_to_DDMMMYYYY(this.resumeData.professionalExperience[i].employmentFrom);
+        this.resumeData.professionalExperience[i].employmentFrom = service.convert_YYYYMMDD_to_DDMMMYYYY(this.resumeData.professionalExperience[i].employmentFrom);
       }
       if( regExForDate.test(this.resumeData.professionalExperience[i].employmentTo) ){
-        this.resumeData.professionalExperience[i].employmentTo = this.convert_YYYYMMDD_to_DDMMMYYYY(this.resumeData.professionalExperience[i].employmentTo);
+        this.resumeData.professionalExperience[i].employmentTo = service.convert_YYYYMMDD_to_DDMMMYYYY(this.resumeData.professionalExperience[i].employmentTo);
       }
     }
 
@@ -76,50 +77,7 @@ export class LayoutstraightComponent implements OnInit {
     this.cssValueForPageBreakInsideLanguageProficiency = this.resumeData.avoidPageBreakInsideLanguageProficiency == true ? "avoid" : "auto";
     this.cssValueForPageBreakInsideProfessionalAchievements = this.resumeData.avoidPageBreakInsideProfessionalAchievements == true ? "avoid" : "auto";                    
     this.cssValueForPageBreakInsideReferences = this.resumeData.avoidPageBreakInsideReferences == true ? "avoid" : "auto";    
-  }
-
-  convert_YYYYMMDD_to_DDMMMYYYY(dateString: string){
-
-    //ref: https://stackoverflow.com/questions/40354697/how-to-convert-yyyy-mm-dd-to-dd-mon-yyyy-with-month-name-using-javascript
-    // the code below has been almost fully copied from the link above
-
-    var date = new Date(dateString);
-
-    if ( isNaN( date.getTime() ) ) 
-    {
-       return dateString;
-    }
-    
-    var month = new Array();
-     month[0] = "January";
-     month[1] = "February";
-     month[2] = "March";
-     month[3] = "April";
-     month[4] = "May";
-     month[5] = "June";
-     month[6] = "July";
-     month[7] = "August";
-     month[8] = "September";
-     month[9] = "October";
-     month[10] = "November";
-     month[11] = "December";
-
-     var day = date.getDate();
-
-     var dayAsString = day + "";
-     let regExEndsWith1 = /1$/
-     let regExEndsWith11 = /11$/     
-     let regExEndsWith2 = /2$/
-     let regExEndsWith3 = /3$/     
-
-     var suffix = ""
-     if( regExEndsWith1.test(dayAsString) && !regExEndsWith11.test(dayAsString) ) suffix = "st"
-     else if( regExEndsWith2.test(dayAsString) ) suffix = "nd"     
-     else if( regExEndsWith3.test(dayAsString) ) suffix = "rd"          
-     else suffix = "th"
-          
-     return    day + suffix + " " +month[date.getMonth()] + " " + date.getFullYear();          
-  }
+  }  
 
   ngOnInit(): void {
   }
