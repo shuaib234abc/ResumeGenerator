@@ -117,6 +117,16 @@ a.deleteLink:hover{
 .small_margin_top{margin-top:5%}
 .medium_margin_top{margin-top:8%}
 
+#table_contactInformation fa-icon{
+  font-size:1.4em;
+}
+#table_contactInformation td:nth-child(1){
+  width:14%;
+}
+#table_contactInformation td:nth-child(2){
+  width:76%;
+}
+
 /* end - styles for CV */
 
 #container_for_printable_div{

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResumeData } from '../models/resumedata';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from '../common.service';
+import { faComments, faAt, faMobileAlt, faHome, faStarHalfAlt, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-layoutfancy',
@@ -9,6 +10,14 @@ import { CommonService } from '../common.service';
   styleUrls: ['./layoutfancy.component.css']
 })
 export class LayoutfancyComponent implements OnInit {
+
+  //references: https://github.com/FortAwesome/angular-fontawesome
+  faAt = faAt
+  faMobileAlt = faMobileAlt
+  faHome = faHome
+  faStarHalfAlt = faStarHalfAlt
+  faStar = faStar
+  faComments = faComments
 
   resumeData: ResumeData;
   combinedContactNumber: string;

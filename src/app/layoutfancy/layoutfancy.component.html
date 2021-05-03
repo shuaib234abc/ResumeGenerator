@@ -67,7 +67,7 @@
   
                       <table class="cv_section cv_fancy_layout">
                         <tr>
-                          <td style="width:30%">
+                          <td style="width:35%">
 
                             <div class="photo_container">
                               <img src="{{ resumeData.photo }}" />
@@ -75,16 +75,30 @@
           
                             
                             <div class="fancy_borders medium_margin_top">
-                              <div class="prominent_text">Email: {{ resumeData.emailAddr }}</div>                           
-                              <div class="prominent_text">Contact number: {{ combinedContactNumber }}</div>       
-                              <div class="prominent_text" [hidden]="resumeData.skypeName == null">
-                                Skype : {{resumeData.skypeName}}
-                              </div>                               
-                              <div class="prominent_text">{{ resumeData.mailingAddr }}</div>                                                                 
+
+                              <table id="table_contactInformation">
+                                <tr>
+                                  <td><fa-icon [icon]="faAt"></fa-icon></td>
+                                  <td class="prominent_text">{{ resumeData.emailAddr }}</td>
+                                </tr>
+                                <tr>
+                                  <td><fa-icon [icon]="faMobileAlt"></fa-icon></td>
+                                  <td class="prominent_text">{{ combinedContactNumber }}</td>
+                                </tr>
+                                <tr [hidden]="resumeData.skypeName == null">
+                                  <td><fa-icon [icon]="faComments"></fa-icon></td>
+                                  <td class="prominent_text">Skype name: {{resumeData.skypeName}}</td>
+                                </tr>
+                                <tr>
+                                  <td><fa-icon [icon]="faHome"></fa-icon></td>
+                                  <td class="prominent_text">{{ resumeData.mailingAddr }}</td>
+                                </tr>                                                                                                
+                              </table>
+
                             </div>                          
                                                    
                           </td>  
-                          <td style="width:10%">
+                          <td style="width:5%">
                             &nbsp;
                           </td>
                           <td style="width:60%">
@@ -152,9 +166,13 @@
                                
                     <table [hidden]="resumeData.githubProjects.length <= 0" class="cv_section" [ngStyle]="{'page-break-inside': cssValueForPageBreakInsideGithubProjects}">
                         <tr>
-                            <td class="cv_section_heading">Featured Personal Projects</td>
+                            <td colspan="2" class="cv_section_heading">Featured Personal Projects</td>
                         </tr>
-                        <tr *ngFor="let d of resumeData['githubProjects']">
+                        <tr *ngFor="let d of resumeData['githubProjects']; let i=index">  <!-- ref: https://stackoverflow.com/questions/38496934/serial-number-in-table-angular-2 -->
+                            <td style="width:7%">
+                              <span *ngIf="(i+1)%2 == 0"><fa-icon style="font-size:2.3em" [icon]="faStar"></fa-icon></span>
+                              <span *ngIf="(i+1)%2 != 0"><fa-icon style="font-size:2.3em" [icon]="faStarHalfAlt"></fa-icon></span>                                                            
+                            </td>
                             <td style="padding-top:3%">
                                   <div style="width:95%;margin:0px auto">
   

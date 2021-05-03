@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LayoutstraightComponent } from './layoutstraight/layoutstraight.component';
 import { LayoutfancyComponent } from './layoutfancy/layoutfancy.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LayoutfancyComponent } from './layoutfancy/layoutfancy.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
