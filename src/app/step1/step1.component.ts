@@ -65,6 +65,7 @@ export class Step1Component implements OnInit {
     this.resumeData.mailingAddr = this.dataFormControls.mailingAddr.value    
     this.resumeData.linkedInProfleLink = this.dataFormControls.linkedInProfleLink.value
     this.resumeData.skypeName = this.dataFormControls.skypeName.value
+    this.resumeData.twitterHandle = this.dataFormControls.twitterHandle.value    
     this.resumeData.hackerRankProfileLink = this.dataFormControls.hackerRankProfileLink.value
     this.resumeData.githubProfileLink = this.dataFormControls.githubProfileLink.value
     this.resumeData.upworkProfileLink = this.dataFormControls.upworkProfileLink.value    
@@ -240,6 +241,7 @@ export class Step1Component implements OnInit {
         careerSummary: new FormControl(''),
         linkedInProfleLink: new FormControl(''),
         skypeName: new FormControl(''),
+        twitterHandle: new FormControl(''),        
         hackerRankProfileLink: new FormControl(''),
         githubProfileLink: new FormControl(''),
         upworkProfileLink: new FormControl(''),
@@ -292,6 +294,7 @@ export class Step1Component implements OnInit {
     this.resumeData.mailingAddr = this.dataFormControls.mailingAddr.value  
     this.resumeData.linkedInProfleLink = this.dataFormControls.linkedInProfleLink.value
     this.resumeData.skypeName = this.dataFormControls.skypeName.value
+    this.resumeData.twitterHandle = this.dataFormControls.twitterHandle.value    
     this.resumeData.hackerRankProfileLink = this.dataFormControls.hackerRankProfileLink.value
     this.resumeData.githubProfileLink = this.dataFormControls.githubProfileLink.value
     this.resumeData.upworkProfileLink = this.dataFormControls.upworkProfileLink.value        
@@ -342,6 +345,7 @@ export class Step1Component implements OnInit {
       this.dataFormControls.careerSummary.setValue(this.resumeData.careerSummary)
       this.dataFormControls.linkedInProfleLink.setValue(this.resumeData.linkedInProfleLink)
       this.dataFormControls.skypeName.setValue(this.resumeData.skypeName)
+      this.dataFormControls.twitterHandle.setValue(this.resumeData.twitterHandle)      
       this.dataFormControls.hackerRankProfileLink.setValue(this.resumeData.hackerRankProfileLink)
       this.dataFormControls.githubProfileLink.setValue(this.resumeData.githubProfileLink)
       this.dataFormControls.upworkProfileLink.setValue(this.resumeData.upworkProfileLink)

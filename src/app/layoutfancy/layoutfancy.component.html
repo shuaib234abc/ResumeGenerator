@@ -89,6 +89,10 @@
                                   <td><fa-icon [icon]="faComments"></fa-icon></td>
                                   <td class="prominent_text">Skype name: {{resumeData.skypeName}}</td>
                                 </tr>
+                                <tr [hidden]="resumeData.twitterHandle == null">
+                                  <td><fa-icon [icon]="faShareAlt"></fa-icon></td>
+                                  <td class="prominent_text">Twitter: @{{resumeData.twitterHandle}}</td>
+                                </tr>                                
                                 <tr>
                                   <td><fa-icon [icon]="faHome"></fa-icon></td>
                                   <td class="prominent_text">{{ resumeData.mailingAddr }}</td>

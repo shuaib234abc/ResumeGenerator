@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResumeData } from '../models/resumedata';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from '../common.service';
-import { faComments, faAt, faMobileAlt, faHome, faStarHalfAlt, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faShareAlt, faComments, faAt, faMobileAlt, faHome, faStarHalfAlt, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-layoutfancy',
@@ -18,6 +18,7 @@ export class LayoutfancyComponent implements OnInit {
   faStarHalfAlt = faStarHalfAlt
   faStar = faStar
   faComments = faComments
+  faShareAlt = faShareAlt
 
   resumeData: ResumeData;
   combinedContactNumber: string;

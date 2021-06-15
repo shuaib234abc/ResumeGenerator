@@ -77,7 +77,10 @@
                             </div>
                             <div class="prominent_text" [hidden]="resumeData.skypeName == null">
                               Skype : {{resumeData.skypeName}}
-                            </div>                          
+                            </div>  
+                            <div class="prominent_text" [hidden]="resumeData.twitterHandle == null">
+                              Twitter : @{{resumeData.twitterHandle}}
+                            </div>                                                      
                             <div class="prominent_text" [hidden]="resumeData.hackerRankProfileLink == null">
                               HackerRank : <a target="_blank" href="{{resumeData.hackerRankProfileLink}}">{{resumeData.hackerRankProfileLink}}</a>
                             </div>                          

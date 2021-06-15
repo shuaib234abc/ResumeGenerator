@@ -18,6 +18,7 @@ export class ResumeData {
         careerSummary!: string        
         linkedInProfleLink!: string
         skypeName!: string
+        twitterHandle!: string
         hackerRankProfileLink!: string
         githubProfileLink!: string
         upworkProfileLink!: string
